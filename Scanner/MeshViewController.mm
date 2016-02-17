@@ -380,8 +380,8 @@ namespace
     glDeleteRenderbuffers(1, &depthRenderBuffer);
 }
 
-- (void)saveMesh
-{
+- (void)saveMesh {
+    // Create path from Scan (Wavefront .obj file format)
     NSString *cacheDirectory = [NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES ) objectAtIndex:0];
     NSString *filename = @"Scan.obj";
     NSString *filePath = [cacheDirectory stringByAppendingPathComponent:filename];
@@ -389,23 +389,26 @@ namespace
     NSError *error;
     STMesh *meshToSend = _mesh;
     BOOL success = [meshToSend writeToFile:filePath options:options error:&error];
+    
+    // Generate Parse File from Scan.obj
     PFFile *meshFile = [PFFile fileWithName:filename data:[NSData dataWithContentsOfFile:filePath]];
-    NSString *titleString = [NSString new];
+    
+    // Handle error if scan fails
     if (!success)
     {
-        UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:@"The scan could not be saved."
+        UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"The scan could not be saved."
                                                                        message: [NSString stringWithFormat:@"Exporting failed: %@.",[error localizedDescription]]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
                                                                 style:UIAlertActionStyleDefault
-                                                              handler:^(UIAlertAction * action) { }];
-        
+                                                              handler:^(UIAlertAction *action) { }];
         [errorAlert addAction:defaultAction];
         [self presentViewController:errorAlert animated:YES completion:nil];
     }
-
-    UIAlertController* saveAlert = [UIAlertController alertControllerWithTitle:@"Please Name Your Scan"
+    
+    // Prompt User to Name Their Scan
+    UIAlertController *saveAlert = [UIAlertController alertControllerWithTitle:@"Please Name Your Scan"
                                                                    message: nil
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
@@ -413,21 +416,22 @@ namespace
         textField.placeholder = @"Title";
     }];
     
-    UIAlertAction* saveAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-              NSString *screenshotFilename = @"Preview.jpg";
-              NSString *screenshotPath =[cacheDirectory stringByAppendingPathComponent:screenshotFilename];
-              [self prepareScreenShot:screenshotPath];
-          PFFile *screenShot = [PFFile fileWithName:screenshotFilename data:[NSData dataWithContentsOfFile:screenshotPath]];
-          PFObject *meshObject = [PFObject objectWithClassName:@"Scan"];
-          meshObject[@"scanFile"] = meshFile;
-          meshObject[@"thumbnail"] = screenShot;
-          meshObject[@"title"] = saveAlert.textFields.firstObject.text;
-          [meshObject saveInBackground];
+    // Save Scan to Parse
+    UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSString *screenshotFilename = @"Preview.jpg";
+        NSString *screenshotPath =[cacheDirectory stringByAppendingPathComponent:screenshotFilename];
+        [self prepareScreenShot:screenshotPath];
+        PFFile *screenShot = [PFFile fileWithName:screenshotFilename data:[NSData dataWithContentsOfFile:screenshotPath]];
+        PFObject *meshObject = [PFObject objectWithClassName:@"Scan"];
+        meshObject[@"scanFile"] = meshFile;
+        meshObject[@"thumbnail"] = screenShot;
+        meshObject[@"title"] = saveAlert.textFields.firstObject.text;
+        // This does not currently handle an error but it should and will shortly
+        [meshObject saveInBackground];
     }];
     
     [saveAlert addAction:saveAction];
     [self presentViewController:saveAlert animated:YES completion:nil];
-    
 }
 
 - (void)emailMesh
