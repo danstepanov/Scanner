@@ -390,6 +390,8 @@ namespace
     STMesh *meshToSend = _mesh;
     BOOL success = [meshToSend writeToFile:filePath options:options error:&error];
     
+    // TODO: Have User authenticate as PFUser in order to separate scans based on a per-user basis
+    
     // Generate Parse File from Scan.obj
     PFFile *meshFile = [PFFile fileWithName:filename data:[NSData dataWithContentsOfFile:filePath]];
     
@@ -397,8 +399,8 @@ namespace
     if (!success)
     {
         UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"The scan could not be saved."
-                                                                       message: [NSString stringWithFormat:@"Exporting failed: %@.",[error localizedDescription]]
-                                                                preferredStyle:UIAlertControllerStyleAlert];
+                                                                            message:[NSString stringWithFormat:@"Exporting failed: %@.",[error localizedDescription]]
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
                                                                 style:UIAlertActionStyleDefault
@@ -409,8 +411,8 @@ namespace
     
     // Prompt User to Name Their Scan
     UIAlertController *saveAlert = [UIAlertController alertControllerWithTitle:@"Please Name Your Scan"
-                                                                   message: nil
-                                                            preferredStyle:UIAlertControllerStyleAlert];
+                                                                       message: nil
+                                                                preferredStyle:UIAlertControllerStyleAlert];
     
     [saveAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Title";
