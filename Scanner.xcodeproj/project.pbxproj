@@ -67,7 +67,7 @@
 
 /* Begin PBXFileReference section */
 		1F300614186E3B8F00405D34 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		1F9EAEFB1AB16E060077D63C /* Structure.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Structure.framework; path = ../Frameworks/Structure.framework; sourceTree = "<group>"; };
+		1F9EAEFB1AB16E060077D63C /* Structure.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Structure.framework; path = Frameworks/Structure.framework; sourceTree = "<group>"; };
 		2A0BA2D2184ECE0C008FBE2E /* MeshRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshRenderer.h; sourceTree = "<group>"; };
 		2A0BA3E318500398008FBE2E /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		2A1557BB1A37D198007C485A /* ViewController+OpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+OpenGL.h"; sourceTree = "<group>"; };
@@ -128,8 +128,8 @@
 		7E2288CD198FE67D00F6E3B2 /* CustomUIKitStyles.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomUIKitStyles.mm; sourceTree = "<group>"; };
 		7EAD26B2198B47DA00638C9C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7EAD26B4198C07F600638C9C /* CustomUIKitStyles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomUIKitStyles.h; sourceTree = "<group>"; };
-		D006E5671C71F0CC00151718 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		D006E5681C71F0CC00151718 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		D006E5671C71F0CC00151718 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
+		D006E5681C71F0CC00151718 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		D006E56B1C72AAC300151718 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D006E56C1C72AAC300151718 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D006E56D1C72AAC300151718 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -145,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F9EAEFC1AB16E060077D63C /* Structure.framework in Frameworks */,
 				D006E5731C72AAC300151718 /* AudioToolbox.framework in Frameworks */,
 				D006E5741C72AAC300151718 /* CFNetwork.framework in Frameworks */,
 				D006E5751C72AAC300151718 /* CoreLocation.framework in Frameworks */,
@@ -155,7 +156,6 @@
 				D006E57A1C72AAC300151718 /* SystemConfiguration.framework in Frameworks */,
 				2AF77B8B17F2575500A99E20 /* CoreGraphics.framework in Frameworks */,
 				2D74AC2E18461A83009F7B5B /* QuartzCore.framework in Frameworks */,
-				1F9EAEFC1AB16E060077D63C /* Structure.framework in Frameworks */,
 				D006E56A1C71F0CC00151718 /* Bolts.framework in Frameworks */,
 				7EAD26B3198B47DA00638C9C /* libz.dylib in Frameworks */,
 				2A3F2BB01857FB1600EE7A96 /* MessageUI.framework in Frameworks */,
@@ -455,6 +455,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					../Frameworks,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Scanner/Scanner-Prefix.pch";
@@ -494,6 +495,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					../Frameworks,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Scanner/Scanner-Prefix.pch";
