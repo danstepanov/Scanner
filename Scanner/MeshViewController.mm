@@ -385,57 +385,49 @@ namespace
     NSString *cacheDirectory = [NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES ) objectAtIndex:0];
     NSString *filename = @"Scan.obj";
     NSString *filePath = [cacheDirectory stringByAppendingPathComponent:filename];
-    NSDictionary *options = @{ kSTMeshWriteOptionFileFormatKey: @(STMeshWriteOptionFileFormatObjFileZip)};
-    NSError* error;
-    STMesh* meshToSend = _mesh;
-    [meshToSend writeToFile:filePath options:options error:&error];
-    //PFFile *meshFile3 = [PFFile fileWithData:[NSData dataWithContentsOfFile:filePath]];
-    PFFile *meshFile2 = [PFFile fileWithData:[NSData dataWithContentsOfFile:filePath] contentType:@"application/zip"];
+    NSDictionary *options = @{ kSTMeshWriteOptionFileFormatKey: @(STMeshWriteOptionFileFormatObjFile)};
+    NSError *error;
+    STMesh *meshToSend = _mesh;
+    BOOL success = [meshToSend writeToFile:filePath options:options error:&error];
     PFFile *meshFile = [PFFile fileWithName:filename data:[NSData dataWithContentsOfFile:filePath]];
-    //PFFile *meshFile = [PFFile fileWithData:[NSData dataWithContentsOfFile:filePath options:options error:&error]];
-    //BOOL success =
-    //
-//    if (!success)
-//    {
-//        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"The scan could not be saved."
-//                                                                       message: [NSString stringWithFormat:@"Exporting failed: %@.",[error localizedDescription]]
-//                                                                preferredStyle:UIAlertControllerStyleAlert];
-//        
-//        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
-//                                                                style:UIAlertActionStyleDefault
-//                                                              handler:^(UIAlertAction * action) { }];
-//        
-//        [alert addAction:defaultAction];
-//        [self presentViewController:alert animated:YES completion:nil];
-//    }
-    PFObject *meshObject = [PFObject objectWithClassName:@"Scan"];
-    meshObject[@"scanFile"] = meshFile;
-    meshObject[@"title"] = @"title";
-    [meshObject saveInBackground];
-//        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Please Give Your Scan a Title"
-//                                                                       message: nil
-//                                                                preferredStyle:UIAlertControllerStyleAlert];
-//        
-//        [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-//            textField.placeholder = @"Title";
-//        }];
-//        
-//        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-//              //NSString* screenshotFilename = @"Preview.jpg";
-//              //NSString *screenshotPath =[cacheDirectory stringByAppendingPathComponent:screenshotFilename];
-//              //[self prepareScreenShot:screenshotPath];
-//              
-//              //UIImage *screenshot = [UIImage imageWithData:[NSData dataWithContentsOfFile:screenshotPath]];
-//              PFObject *meshObject = [PFObject objectWithClassName:@"Scan"];
-//              meshObject[@"scanFile"] = meshToSend;
-//              //meshObject[@"thumbnail"] = screenshot;
-//              //meshObject[@"title"] = @"title";
-//              [meshObject saveInBackground];
-//        }];
-//        
-//        [alert addAction:defaultAction];
-//        [self presentViewController:alert animated:YES completion:nil];
-//    }
+    NSString *titleString = [NSString new];
+    if (!success)
+    {
+        UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:@"The scan could not be saved."
+                                                                       message: [NSString stringWithFormat:@"Exporting failed: %@.",[error localizedDescription]]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) { }];
+        
+        [errorAlert addAction:defaultAction];
+        [self presentViewController:errorAlert animated:YES completion:nil];
+    }
+
+    UIAlertController* saveAlert = [UIAlertController alertControllerWithTitle:@"Please Name Your Scan"
+                                                                   message: nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    [saveAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"Title";
+    }];
+    
+    UIAlertAction* saveAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+              NSString *screenshotFilename = @"Preview.jpg";
+              NSString *screenshotPath =[cacheDirectory stringByAppendingPathComponent:screenshotFilename];
+              [self prepareScreenShot:screenshotPath];
+          PFFile *screenShot = [PFFile fileWithName:screenshotFilename data:[NSData dataWithContentsOfFile:screenshotPath]];
+          PFObject *meshObject = [PFObject objectWithClassName:@"Scan"];
+          meshObject[@"scanFile"] = meshFile;
+          meshObject[@"thumbnail"] = screenShot;
+          meshObject[@"title"] = saveAlert.textFields.firstObject.text;
+          [meshObject saveInBackground];
+    }];
+    
+    [saveAlert addAction:saveAction];
+    [self presentViewController:saveAlert animated:YES completion:nil];
+    
 }
 
 - (void)emailMesh
