@@ -9,6 +9,8 @@
 #import "ViewpointController.h"
 #import "CustomUIKitStyles.h"
 #import <Parse/Parse.h>
+#import <AFNetworking/AFNetworking.h>
+#import <JGProgressHUD/JGProgressHUD.h>
 
 #import <ImageIO/ImageIO.h>
 
@@ -59,7 +61,7 @@ namespace
     
 }
 
-@interface MeshViewController ()
+@interface MeshViewController () <JGProgressHUDDelegate>
 {
     STMesh *_mesh;
     CADisplayLink *_displayLink;
@@ -430,6 +432,44 @@ namespace
         meshObject[@"title"] = saveAlert.textFields.firstObject.text;
         // This does not currently handle an error but it should and will shortly
         [meshObject saveInBackground];
+        
+        // Save scan to SketchFab
+        NSDictionary *params = @{@"token"     : @"f0fe1c2f3d104b9d98f01d1893fd8653",
+                                 @"modelFile" : filePath,
+                                 @"name"      : filename};
+        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:@"https://api.sketchfab.com/v2/models" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            [formData appendPartWithFileURL:[NSURL fileURLWithPath:filePath] name:filename fileName:filename mimeType:@"text/plain" error:nil];
+            
+        } error:nil];
+        
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        
+        JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        HUD.textLabel.text = @"Loading";
+        
+        NSURLSessionUploadTask *uploadTask;
+        uploadTask = [manager
+                      uploadTaskWithStreamedRequest:request
+                      progress:^(NSProgress * _Nonnull uploadProgress) {
+                          // This is not called back on the main queue.
+                          // You are responsible for dispatching to the main queue for UI updates
+                          dispatch_async(dispatch_get_main_queue(), ^{
+                              //Update the progress view
+                              
+                              [HUD showInView:self.view];
+                          });
+                      }
+                      completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                          if (error) {
+                              NSLog(@"Error: %@", error);
+                          } else {
+                              NSLog(@"%@ %@", response, responseObject);
+                              [HUD dismiss];
+                          }
+                      }];
+        
+        [uploadTask resume];
+
     }];
     
     [saveAlert addAction:saveAction];

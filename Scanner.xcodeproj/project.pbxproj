@@ -63,7 +63,25 @@
 		D006E5781C72AAC300151718 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D006E5701C72AAC300151718 /* Security.framework */; };
 		D006E5791C72AAC300151718 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D006E5711C72AAC300151718 /* StoreKit.framework */; };
 		D006E57A1C72AAC300151718 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D006E5721C72AAC300151718 /* SystemConfiguration.framework */; };
+		D0E7446C1C7575D6005C6BE4 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E7446B1C7575D6005C6BE4 /* AFNetworking.framework */; };
+		D0E7446E1C7590E8005C6BE4 /* JGProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E7446D1C7590E8005C6BE4 /* JGProgressHUD.framework */; };
+		D0E744721C759A94005C6BE4 /* JGProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E7446D1C7590E8005C6BE4 /* JGProgressHUD.framework */; };
+		D0E744731C759A94005C6BE4 /* JGProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0E7446D1C7590E8005C6BE4 /* JGProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D0E744741C759A94005C6BE4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D0E744731C759A94005C6BE4 /* JGProgressHUD.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1F300614186E3B8F00405D34 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -138,6 +156,11 @@
 		D006E5701C72AAC300151718 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D006E5711C72AAC300151718 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D006E5721C72AAC300151718 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D0E744641C7571AF005C6BE4 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		D0E744651C7571AF005C6BE4 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = Carthage/Build/iOS/AlamofireImage.framework; sourceTree = "<group>"; };
+		D0E744661C7571AF005C6BE4 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		D0E7446B1C7575D6005C6BE4 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = Carthage/Build/iOS/AFNetworking.framework; sourceTree = "<group>"; };
+		D0E7446D1C7590E8005C6BE4 /* JGProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JGProgressHUD.framework; path = Carthage/Build/iOS/JGProgressHUD.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,8 +172,11 @@
 				D006E5731C72AAC300151718 /* AudioToolbox.framework in Frameworks */,
 				D006E5741C72AAC300151718 /* CFNetwork.framework in Frameworks */,
 				D006E5751C72AAC300151718 /* CoreLocation.framework in Frameworks */,
+				D0E7446E1C7590E8005C6BE4 /* JGProgressHUD.framework in Frameworks */,
 				D006E5761C72AAC300151718 /* libsqlite3.tbd in Frameworks */,
+				D0E7446C1C7575D6005C6BE4 /* AFNetworking.framework in Frameworks */,
 				D006E5771C72AAC300151718 /* libz.tbd in Frameworks */,
+				D0E744721C759A94005C6BE4 /* JGProgressHUD.framework in Frameworks */,
 				D006E5781C72AAC300151718 /* Security.framework in Frameworks */,
 				D006E5791C72AAC300151718 /* StoreKit.framework in Frameworks */,
 				D006E57A1C72AAC300151718 /* SystemConfiguration.framework in Frameworks */,
@@ -198,6 +224,11 @@
 		2AFC8D76176F966000F7F3B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0E7446D1C7590E8005C6BE4 /* JGProgressHUD.framework */,
+				D0E7446B1C7575D6005C6BE4 /* AFNetworking.framework */,
+				D0E744641C7571AF005C6BE4 /* Alamofire.framework */,
+				D0E744651C7571AF005C6BE4 /* AlamofireImage.framework */,
+				D0E744661C7571AF005C6BE4 /* SwiftyJSON.framework */,
 				D006E56B1C72AAC300151718 /* AudioToolbox.framework */,
 				D006E56C1C72AAC300151718 /* CFNetwork.framework */,
 				D006E56D1C72AAC300151718 /* CoreLocation.framework */,
@@ -306,6 +337,8 @@
 				2AFC8D70176F966000F7F3B5 /* Sources */,
 				2AFC8D71176F966000F7F3B5 /* Frameworks */,
 				2AFC8D72176F966000F7F3B5 /* Resources */,
+				D0E7446A1C7574BD005C6BE4 /* ShellScript */,
+				D0E744741C759A94005C6BE4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -372,6 +405,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D0E7446A1C7574BD005C6BE4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/AFNetworking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/JGProgressHUD.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2AFC8D70176F966000F7F3B5 /* Sources */ = {
@@ -456,10 +507,13 @@
 					../Frameworks,
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(SRCROOT)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Scanner/Scanner-Prefix.pch";
 				INFOPLIST_FILE = "Scanner/Scanner-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.structure.sample.Scannerr;
 				PRODUCT_NAME = Scanner;
 			};
@@ -496,10 +550,13 @@
 					../Frameworks,
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(SRCROOT)/Carthage/Build/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Scanner/Scanner-Prefix.pch";
 				INFOPLIST_FILE = "Scanner/Scanner-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.structure.sample.Scannerr;
 				PRODUCT_NAME = Scanner;
 				PROVISIONING_PROFILE = "";
